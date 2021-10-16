@@ -74,7 +74,7 @@ class Sensor(DAQReadAnalog):
                     len(Sensor.SENSOR_CHANNELS) + len(Sensor.TRIGGER_CHANNELS))
 
         self.device_id = settings.device_id
-        self.name = settings.sensor_name
+        # self.name = settings.sensor_name
         self.convert_to_FT = settings.convert_to_FT
         self.timer = Timer(sync_timer=app_timer) # own timer, because this
         # class is used in own process

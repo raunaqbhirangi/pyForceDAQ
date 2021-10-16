@@ -47,6 +47,8 @@ def _check_sensor_calibration_settings(device_ids, sensor_names,
         except:
             sensor_name = "??"
             error = True
+        cal = find_calibration_file(calibration_folder=calibration_folder,
+                                    sensor_name=sensor_name)
         try:
             cal = find_calibration_file(calibration_folder=calibration_folder,
                                     sensor_name=sensor_name)
