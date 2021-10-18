@@ -4,7 +4,7 @@ import time
 import numpy as np
 
 # from forceDAQ.force import *
-from .forceDAQ.force import *
+from forceDAQ.force import *
 
 _ForceSensorSetting = collections.namedtuple('ForceSensorSetting',
           'device_name_prefix device_ids sensor_names remote_control '

@@ -164,8 +164,8 @@ class SensorProcess(Process):
                     sensor.start_data_acquisition()
                     buffer.append(DAQEvents(time=sensor.timer.time,
                                             code="started:"+repr(sensor.device_id)))
-                    logging.info("Sensor start, name {},  pid {}, priority {}".format(
-                        self.pid, sensor.name, get_priority(self.pid)))
+                    logging.info("Sensor start, pid {}, priority {}".format(
+                        self.pid, get_priority(self.pid)))
 
                     self._buffer_size.value = len(buffer)
                     is_polling = True
@@ -191,8 +191,8 @@ class SensorProcess(Process):
                     buffer.append(DAQEvents(time=sensor.timer.time,
                                             code="pause:"+repr(sensor.device_id)))
                     self._buffer_size.value = len(buffer)
-                    logging.info("Sensor stop, name {}".format(
-                        self.pid, sensor.name, get_priority(self.pid)))
+                    logging.info("Sensor stop, pid {}, priority {}".format(
+                        self.pid, get_priority(self.pid)))
                     is_polling = False
                     ptp.stop()
 
