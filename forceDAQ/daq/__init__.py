@@ -10,9 +10,8 @@ from .. import USE_DUMMY_SENSOR
 try:
     # from ._daq_read_Analog_pydaqmx import DAQReadAnalog
     from ..daq._daq_read_analog_nidaqmx import DAQReadAnalog
-    print('works')
 except:
-    print('nope')
+    print('Potentially nidaqmx installation missing')
     from ._daq_read_Analog_dummy import DAQReadAnalog
 
 if USE_DUMMY_SENSOR:

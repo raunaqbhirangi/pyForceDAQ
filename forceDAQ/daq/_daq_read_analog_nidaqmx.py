@@ -26,7 +26,7 @@ class DAQReadAnalog(nidaqmx.Task):
                             nidaqmx.constants.VoltageUnits.VOLTS,    # units
                             None                        # customScaleName
                             )
-        print('added channels')
+        # print('added channels')
         #CfgSampClkTiming
         self.timing.cfg_samp_clk_timing(configuration.rate,          # rate
                             "",                 # source
@@ -34,8 +34,8 @@ class DAQReadAnalog(nidaqmx.Task):
                             nidaqmx.constants.AcquisitionType.CONTINUOUS,# sampleMode
                             ct.c_uint64(DAQReadAnalog.NI_DAQ_BUFFER_SIZE) # sampsPerChanToAcquire, i.e. buffer size
                             )
-        print('devices')
-        print(nidaqmx.Task.devices)
+        # print('devices')
+        # print(nidaqmx.Task.devices)
         self._task_is_started = False
         self.read_array_size_in_samples = ct.c_uint32(read_array_size_in_samples)
         #print(self.read_array_size_in_samples )

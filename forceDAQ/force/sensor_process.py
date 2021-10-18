@@ -149,7 +149,6 @@ class SensorProcess(Process):
         buffer = []
         self._buffer_size.value = 0
         sensor = Sensor(self.sensor_settings)
-
         self._event_is_polling.clear()
         self._event_sending_data.clear()
         is_polling = False
