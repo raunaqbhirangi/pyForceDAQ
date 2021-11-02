@@ -47,6 +47,7 @@ class SensorProcess(Process):
         self._last_Tx = sharedctypes.RawValue(ct.c_float)
         self._last_Ty = sharedctypes.RawValue(ct.c_float)
         self._last_Tz = sharedctypes.RawValue(ct.c_float)
+        self._last_time = sharedctypes.RawValue(ct.c_float)
         self._buffer_size = sharedctypes.RawValue(ct.c_uint64)
         self._sample_cnt = sharedctypes.Value(ct.c_uint64)
         self._event_quit_request = Event()
@@ -129,7 +130,7 @@ class SensorProcess(Process):
         rtn = []
         if self._event_sending_data.is_set() or self._buffer_size.value > 0:
             self._event_sending_data.wait()
-            while self._buffer_size.value > 0:  # wait until buffer is empty
+            while self._buffer_size.value > 0 or self._pipe_i.poll():  # wait until buffer is empty
                 rtn.extend(self._pipe_i.recv())
             self._event_sending_data.clear() # stop sending
         return rtn

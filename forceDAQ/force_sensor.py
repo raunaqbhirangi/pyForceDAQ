@@ -4,7 +4,7 @@ import time
 import numpy as np
 
 # from forceDAQ.force import *
-from forceDAQ.force import *
+from .force import *
 
 _ForceSensorSetting = collections.namedtuple('ForceSensorSetting',
           'device_name_prefix device_ids sensor_names remote_control '
@@ -60,7 +60,7 @@ class ForceSensor:
         self.recorder.start_recording()
 
     def pause_recording(self):
-        self.recorder.pause_recording()
+        return self.recorder.pause_recording()
 
     def get_data(self, num_samples):
         # st_time = time.time()
@@ -68,6 +68,7 @@ class ForceSensor:
         # self.recorder.start_recording()
         # print('Rec_start: {}'.format(time.time()-st_time))
         data = [[]]*self.n_sensors
+        data_time = [[]] * self.n_sensors
         # For multiple sensors, k will need to be redefined differently
         k = 0
         while k<num_samples:
@@ -85,6 +86,7 @@ class ForceSensor:
             for s in check_new:
                 new_data = list(self.recorder.force_sensor_processes[s].get_Fxyz())
                 data[s] += [new_data]
+                data_time[s] += [time.time()]
                 k+=1
         # print(new_data)
         
@@ -93,7 +95,7 @@ class ForceSensor:
         # print('Rec_end: {}'.format(time.time()-st_time))
             # app_timer.wait(500)
 
-        return data    
+        return data, data_time  
     def check_new_samples(self):
         """returns list of sensors with new samples"""
         rtn = []

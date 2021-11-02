@@ -255,7 +255,7 @@ class DataRecorder(object):
 
         # get data
         for fsp in self._force_sensor_processes:
-            buffer = fsp.get_buffer()
+            buffer = fsp.get_buffer(timeout=10.0)
             self._save_data(buffer, recording_screen)
             data.extend(buffer)
 
